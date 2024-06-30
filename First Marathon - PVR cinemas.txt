@@ -1,0 +1,61 @@
+package testleafAssignmnets;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
+
+public class DeleteLead {
+
+	public static void main(String[] args) throws InterruptedException  {
+		// TODO Auto-generated method stub
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("--disable-notifications");
+		ChromeDriver driver=new ChromeDriver(options);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+		driver.get("https://www.pvrcinemas.com/.");
+		driver.findElement(By.xpath("//h6[text()='Chennai']")).click();
+		driver.findElement(By.xpath("//span[text()='Cinema']")).click();
+		WebElement db = driver.findElement(By.xpath("//span[text()='Select Cinema']"));
+		db.click();
+		driver.findElement(By.xpath("//span[text()='INOX National,Virugambakkam Chennai']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("(//li[@class='p-dropdown-item'])[2]")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("(//li[@class='p-dropdown-item'])[1]")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("(//li[@class='p-dropdown-item'])[1]")).click();
+		driver.findElement(By.xpath("//span[text()='Book']")).click();
+		driver.findElement(By.xpath("//button[text()='Accept']")).click();
+		driver.findElement(By.xpath("(//span[@class='seat-current-pvr'])[5]")).click();
+		String text = driver.findElement(By.xpath("//div[@class='summary-movies-content']/h5")).getText();
+		System.out.println("the name of the movie is :"+text);
+		String text2 = driver.findElement(By.xpath("(//div[@class='summary-movies-content']//p)[2]")).getText();
+		System.out.println("the threater name is :"+text2);
+		String text3 = driver.findElement(By.xpath("//div[@class='seat-number']/p")).getText();
+		System.out.println("the selected seat no is :"+text3);
+		String text4 = driver.findElement(By.xpath("//div[@class='grand-prices']/h6")).getText();
+		System.out.println("the grand total amount is :"+text4);
+		driver.findElement(By.xpath("//button[text()='Proceed']")).click();
+		Thread.sleep(2000);
+		String text5 = driver.findElement(By.xpath("//div[@class='grand-tota col-md-3']//span[1]")).getText();
+		System.out.println("After proceed the grand total amount is :"+text5);
+		Thread.sleep(2000);
+         if(text5.equals(text4)) {
+        	  System.out.println("verfied : Kindly proceed");
+          }else
+          {
+        	  System.out.println("verfied : total Error");
+          }
+         driver.findElement(By.xpath("//button[text()='Proceed']")).click();
+         Thread.sleep(2000);
+         driver.findElement(By.xpath("(//div[@class='cross-icon mx-2']//i)[2]")).click();
+         String title = driver.getTitle();
+         System.out.println("navigated to main page :"+title);
+         
+}
+}
